@@ -6,11 +6,15 @@ export default function Callback() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const code = new URLSearchParams(window.location.search).get("code");
-    if (!code) {
+    const codeParam = new URLSearchParams(window.location.search).get("code");
+
+    if (typeof codeParam !== "string") {
       setError("No code found in URL");
       return;
     }
+
+    const code = codeParam;
+
 
     async function run() {
       try {
